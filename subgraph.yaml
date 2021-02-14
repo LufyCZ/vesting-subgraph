@@ -1,0 +1,29 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: SushiMerkleDistributor
+    network: ropsten
+    source:
+      address: "0x2b7F00BAc9B49d30Ced4D01ADEB92d297A19cf1c"
+      abi: SushiMerkleDistributor
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+        - Claimed
+        - MerkleRootUpdated
+        - OwnershipTransferred
+      abis:
+        - name: SushiMerkleDistributor
+          file: ./abis/SushiMerkleDistributor.json
+      eventHandlers:
+        - event: Claimed(uint256,indexed address,indexed uint256)
+          handler: handleClaimed
+        - event: MerkleRootUpdated(indexed bytes32,indexed uint32)
+          handler: handleMerkleRootUpdated
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/mapping.ts
