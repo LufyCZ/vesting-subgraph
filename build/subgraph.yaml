@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: SushiMerkleDistributor
@@ -17,8 +17,8 @@ dataSources:
         - Claimed
       abis:
         - name: SushiMerkleDistributor
-          file: ./abis/SushiMerkleDistributor.json
+          file: SushiMerkleDistributor/abis/SushiMerkleDistributor.json
       eventHandlers:
         - event: Claimed(uint256,uint256,indexed address,indexed uint256)
           handler: handleClaimed
-      file: ./src/mapping.ts
+      file: SushiMerkleDistributor/SushiMerkleDistributor.wasm
